@@ -1,6 +1,19 @@
-.DS_Store
+# Ambiente virtual gerenciado pelo uv
+.venv/
+
+# Python
 __pycache__/
 *.pyc
-.env
-.env.local
-node_modules/
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Dados baixados (não versionar arquivos brutos e outputs)
+data/raw/
+data/output/
+
+# IDEs / OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,10 @@
+[project]
+name = "spot-taxas-b3"
+version = "0.1.0"
+description = "Pipeline de taxas spot B3 vs PTAX BACEN — extração, comparação e Excel"
+requires-python = ">=3.12"
+dependencies = [
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.3",
+    "requests>=2.34.2",
+]
