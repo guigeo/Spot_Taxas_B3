@@ -92,17 +92,21 @@ USD, EUR, AUD, GBP, CAD, CHF, JPY, NZD, SEK, NOK, DKK, ZAR, MXN, ARS, CLP, TRY, 
 Spot_Taxas_B3/
 ├── instruction/
 │   └── PRD_Taxas_Spot_B3.md   # PRD — fonte de verdade
-├── src/                        # Código-fonte (a criar)
+├── src/                        # Código-fonte do pipeline
+│   └── __init__.py
 ├── data/
-│   ├── raw/                    # Arquivos .ex_ e Indic.txt baixados
-│   └── output/                 # Planilhas Excel geradas
-├── tests/                      # Testes (a criar)
-├── pyproject.toml              # Configuração uv (a criar)
-├── uv.lock                     # Lockfile (gerado pelo uv)
+│   ├── raw/                    # Arquivos .ex_ e Indic.txt baixados (não versionado)
+│   └── output/                 # Planilhas Excel geradas (não versionado)
+├── tests/
+│   └── __init__.py
+├── main.py                     # Entrypoint: uv run python main.py
+├── pyproject.toml              # Dependências: pandas, openpyxl, requests
+├── .python-version             # Python 3.12 fixado
+├── uv.lock                     # Lockfile determinístico — commitar
 └── .claude/
     ├── CLAUDE.md               # Este arquivo
-    ├── kb/                     # Knowledge Base
-    └── agents/domain/          # Agentes especializados
+    ├── kb/                     # Knowledge Base (pandas, openpyxl, requests, uv)
+    └── agents/domain/          # b3-pipeline-developer, spot-taxas-b3-expert
 ```
 
 ---
