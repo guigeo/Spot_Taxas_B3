@@ -2,7 +2,7 @@
 # Machine-readable registry for KB domains
 
 version: "1.0"
-last_updated: ""
+last_updated: "2026-06-05"
 
 # File Size Limits (SINGLE SOURCE OF TRUTH)
 limits:
@@ -28,5 +28,63 @@ templates:
   - name: domain-manifest
     path: _templates/domain-manifest.yaml.template
 
-# Domain Registry — add entries here via /create-kb
-domains: {}
+# Domain Registry
+domains:
+  pandas:
+    display_name: "pandas — Data Manipulation"
+    description: "Manipulação e transformação de dados tabulares. Parse de arquivo posicional B3, join com PTAX BACEN, exportação para Excel."
+    entry_point: "kb/pandas/index.md"
+    quick_reference: "kb/pandas/quick-reference.md"
+    created: "2026-06-05"
+    last_validated: "2026-06-05"
+    files:
+      - kb/pandas/index.md
+      - kb/pandas/quick-reference.md
+      - kb/pandas/concepts/dataframe-basics.md
+      - kb/pandas/concepts/merge-join.md
+      - kb/pandas/patterns/parse-fixed-width.md
+      - kb/pandas/patterns/transform-export.md
+
+  openpyxl:
+    display_name: "openpyxl — Excel Generation"
+    description: "Geração e formatação de planilhas Excel (.xlsx). Output final do pipeline B3 com formatação de taxas de câmbio."
+    entry_point: "kb/openpyxl/index.md"
+    quick_reference: "kb/openpyxl/quick-reference.md"
+    created: "2026-06-05"
+    last_validated: "2026-06-05"
+    files:
+      - kb/openpyxl/index.md
+      - kb/openpyxl/quick-reference.md
+      - kb/openpyxl/concepts/workbook-worksheet.md
+      - kb/openpyxl/concepts/cell-formatting.md
+      - kb/openpyxl/patterns/pandas-to-excel.md
+      - kb/openpyxl/patterns/column-width.md
+
+  requests:
+    display_name: "requests — HTTP Client"
+    description: "Chamadas HTTP para download do arquivo B3 (.ex_) e consumo da API PTAX OData do BACEN."
+    entry_point: "kb/requests/index.md"
+    quick_reference: "kb/requests/quick-reference.md"
+    created: "2026-06-05"
+    last_validated: "2026-06-05"
+    files:
+      - kb/requests/index.md
+      - kb/requests/quick-reference.md
+      - kb/requests/concepts/session-basics.md
+      - kb/requests/concepts/response-handling.md
+      - kb/requests/patterns/download-binary.md
+      - kb/requests/patterns/odata-api.md
+
+  uv:
+    display_name: "uv — Python Package Manager"
+    description: "Único gerenciador de dependências do projeto. Substitui pip/venv. NUNCA usar pip install — sempre uv add."
+    entry_point: "kb/uv/index.md"
+    quick_reference: "kb/uv/quick-reference.md"
+    created: "2026-06-05"
+    last_validated: "2026-06-05"
+    files:
+      - kb/uv/index.md
+      - kb/uv/quick-reference.md
+      - kb/uv/concepts/venv-gerenciado.md
+      - kb/uv/concepts/pyproject-vs-requirements.md
+      - kb/uv/patterns/init-project.md
