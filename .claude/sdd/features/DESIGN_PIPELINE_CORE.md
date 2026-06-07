@@ -10,7 +10,7 @@
 | **Date** | 2026-06-05 |
 | **Author** | design-agent |
 | **DEFINE** | [DEFINE_PIPELINE_CORE.md](./DEFINE_PIPELINE_CORE.md) |
-| **Status** | Ready for Build |
+| **Status** | ✅ Complete (Built) |
 
 ---
 
@@ -622,9 +622,10 @@ if __name__ == "__main__":
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2026-06-05 | design-agent | Versão inicial |
+| 1.1 | 2026-06-07 | build-agent | Status atualizado para Complete após build bem-sucedido |
 
 ---
 
 ## Next Step
 
-**Ready for:** `/build .claude/sdd/features/DESIGN_PIPELINE_CORE.md`
+**Ready for:** `/ship .claude/sdd/features/DEFINE_PIPELINE_CORE.md`

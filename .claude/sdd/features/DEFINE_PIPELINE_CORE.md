@@ -9,7 +9,7 @@
 | **Feature** | PIPELINE_CORE |
 | **Date** | 2026-06-05 |
 | **Author** | Guilherme Ramos |
-| **Status** | Ready for Design |
+| **Status** | ✅ Complete (Built) |
 | **Clarity Score** | 15/15 |
 
 ---
@@ -147,9 +147,10 @@ Nenhuma — pronto para Design.
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0 | 2026-06-05 | define-agent | Versão inicial — extraído do PRD_Taxas_Spot_B3.md |
+| 1.1 | 2026-06-07 | build-agent | Status atualizado para Complete após build bem-sucedido |
 
 ---
 
 ## Next Step
 
-**Ready for:** `/design .claude/sdd/features/DEFINE_PIPELINE_CORE.md`
+**Ready for:** `/ship .claude/sdd/features/DEFINE_PIPELINE_CORE.md`
