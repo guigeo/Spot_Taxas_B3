@@ -9,7 +9,7 @@
 | **Feature** | PIPELINE_CORE |
 | **Date** | 2026-06-05 |
 | **Author** | Guilherme Ramos |
-| **Status** | ✅ Complete (Built) |
+| **Status** | ✅ Shipped |
 | **Clarity Score** | 15/15 |
 
 ---
@@ -46,14 +46,14 @@ A B3 publica diariamente um arquivo posicional (`.ex_`) com taxas de câmbio em 
 
 ## Success Criteria
 
-- [ ] Pipeline executa sem intervenção manual para qualquer data útil via `uv run python main.py`
-- [ ] Planilha Excel gerada em `data/output/taxas_spot_b3_{YYYYMMDD}.xlsx` com 8 colunas do PRD
-- [ ] As 19 moedas aparecem na planilha (`null` quando ausente — não é erro fatal)
-- [ ] USD, EUR e JPY corretamente escalados (USD e JPY ÷ 1.000; EUR ÷ 10.000.000)
-- [ ] GBP e NZD calculados via paridade com USD (multiplicação)
-- [ ] CNY calculado via paridade inversa com USD (divisão)
-- [ ] PTAX filtrada apenas com `tipoBoletim = 'Fechamento'`
-- [ ] Dados sempre referentes à data D (mais recente do arquivo), nunca D-1
+- [x] Pipeline executa sem intervenção manual para qualquer data útil via `uv run python main.py`
+- [x] Planilha Excel gerada em `data/output/taxas_spot_b3_{YYYYMMDD}.xlsx` com 8 colunas do PRD
+- [x] As 19 moedas aparecem na planilha (`null` quando ausente — não é erro fatal)
+- [x] USD, EUR e JPY corretamente escalados (USD e JPY ÷ 1.000; EUR ÷ 10.000.000)
+- [x] GBP e NZD calculados via paridade com USD (multiplicação)
+- [x] CNY calculado via paridade inversa com USD (divisão)
+- [x] PTAX filtrada apenas com `tipoBoletim = 'Fechamento'`
+- [x] Dados sempre referentes à data D (mais recente do arquivo), nunca D-1
 
 ---
 
@@ -61,14 +61,14 @@ A B3 publica diariamente um arquivo posicional (`.ex_`) com taxas de câmbio em 
 
 | ID | Scenario | Given | When | Then |
 |----|----------|-------|------|------|
-| AT-001 | Happy path — dia útil | Data útil (ex: 2026-06-03), arquivo B3 e PTAX disponíveis | `uv run python main.py` | Planilha gerada com 19 moedas, spread calculado, sem erros |
-| AT-002 | Dia não útil (sábado) | Data = sábado ou feriado | Pipeline iniciado | Usa automaticamente o último dia útil anterior |
-| AT-003 | Instrumento ausente no B3 | Arquivo B3 não contém uma moeda da lista | Pipeline processa o arquivo | Moeda registrada com `cotacao_b3 = null`, alerta no log, pipeline não para |
-| AT-004 | PTAX ausente para uma moeda | BACEN não publicou PTAX para uma moeda naquele dia | Pipeline consulta BACEN | `ptax_compra` e `ptax_venda` registrados como `null`, pipeline continua |
-| AT-005 | Escala do EUR | Arquivo B3 do dia contém `REUR-D1` | Parse do valor numérico | Valor real calculado com divisor 10^7 (não 10^3), resultado próximo ao mercado |
-| AT-006 | Paridade GBP | Arquivo B3 contém `GBP-PF` e `DOL-D1` | Cálculo do GBP spot | GBP/BRL = USD_spot × paridade_GBP_USD |
-| AT-007 | Paridade CNY | Arquivo B3 contém `CNY-PF` e `DOL-D1` | Cálculo do CNY spot | CNY/BRL = USD_spot ÷ paridade_CNY_USD |
-| AT-008 | Spread correto | Cotação B3 = 5.0099, PTAX venda = 5.0050 | Cálculo do spread | `spread_b3_ptax ≈ 0.0978%` (arredondado 4 casas) |
+| AT-001 | Happy path — dia útil | Data útil (ex: 2026-06-03), arquivo B3 e PTAX disponíveis | `uv run python main.py` | ✅ Planilha gerada com 19 moedas, spread calculado, sem erros |
+| AT-002 | Dia não útil (sábado) | Data = sábado ou feriado | Pipeline iniciado | ✅ Usa automaticamente o último dia útil anterior |
+| AT-003 | Instrumento ausente no B3 | Arquivo B3 não contém uma moeda da lista | Pipeline processa o arquivo | ✅ Moeda registrada com `cotacao_b3 = null`, alerta no log, pipeline não para |
+| AT-004 | PTAX ausente para uma moeda | BACEN não publicou PTAX para uma moeda naquele dia | Pipeline consulta BACEN | ✅ `ptax_compra` e `ptax_venda` registrados como `null`, pipeline continua |
+| AT-005 | Escala do EUR | Arquivo B3 do dia contém `REUR-D1` | Parse do valor numérico | ✅ Valor real calculado com divisor 10^7 (não 10^3), resultado próximo ao mercado |
+| AT-006 | Paridade GBP | Arquivo B3 contém `GBP-PF` e `DOL-D1` | Cálculo do GBP spot | ✅ GBP/BRL = USD_spot × paridade_GBP_USD |
+| AT-007 | Paridade CNY | Arquivo B3 contém `CNY-PF` e `DOL-D1` | Cálculo do CNY spot | ✅ CNY/BRL = USD_spot ÷ paridade_CNY_USD |
+| AT-008 | Spread correto | Cotação B3 = 5.0099, PTAX venda = 5.0050 | Cálculo do spread | ✅ `spread_b3_ptax ≈ 0.0978%` (arredondado 4 casas) |
 
 ---
 
@@ -113,11 +113,11 @@ A B3 publica diariamente um arquivo posicional (`.ex_`) com taxas de câmbio em 
 
 | ID | Assumption | If Wrong, Impact | Validated? |
 |----|------------|------------------|------------|
-| A-001 | Arquivo `.ex_` da B3 é um ZIP válido extraível com `zipfile` | Precisaria de outra lib de descompressão (ex: `py7zr`) | [ ] |
-| A-002 | Indicador de casas decimais dos instrumentos listados no PRD está estável | Revisão manual do divisor por moeda a cada release | [ ] |
-| A-003 | API BACEN `CotacaoTodosComercialDia` retorna todas as 19 moedas em uma chamada | Necessitaria chamadas individuais por moeda | [ ] |
-| A-004 | Feriados nacionais da API BACEN cobrem todos os dias em que B3 não opera | Manter lista local de fallback para casos de borda | [ ] |
-| A-005 | Conexão de internet estável disponível no momento da execução | Adicionar retry com backoff exponencial | [ ] |
+| A-001 | Arquivo `.ex_` da B3 é um ZIP válido extraível com `zipfile` | Precisaria de outra lib de descompressão (ex: `py7zr`) | [x] Nested ZIP com PKSFX inner archive — resolvido com `io.BytesIO` |
+| A-002 | Indicador de casas decimais dos instrumentos listados no PRD está estável | Revisão manual do divisor por moeda a cada release | [x] Decodificação validada contra dados reais B3 |
+| A-003 | API BACEN `CotacaoTodosComercialDia` retorna todas as 19 moedas em uma chamada | Necessitaria chamadas individuais por moeda | [x] Endpoint não existe — trocado por loop `CotacaoMoedaDia` por moeda |
+| A-004 | Feriados nacionais da API BACEN cobrem todos os dias em que B3 não opera | Manter lista local de fallback para casos de borda | [x] Endpoint não existe — trocado por BrasilAPI (`brasilapi.com.br/api/feriados`) |
+| A-005 | Conexão de internet estável disponível no momento da execução | Adicionar retry com backoff exponencial | [x] Retry 3x com backoff 1s/2s/4s implementado |
 
 ---
 
@@ -136,9 +136,7 @@ A B3 publica diariamente um arquivo posicional (`.ex_`) com taxas de câmbio em 
 
 ## Open Questions
 
-Nenhuma — pronto para Design.
-
-Única validação a fazer antes de codar: confirmar se o arquivo `.ex_` é extraível com `zipfile` padrão (A-001). Testar com um arquivo real antes de escrever o módulo de download.
+Todas resolvidas durante o build end-to-end contra dados reais B3 e BACEN.
 
 ---
 
@@ -148,9 +146,10 @@ Nenhuma — pronto para Design.
 |---------|------|--------|---------|
 | 1.0 | 2026-06-05 | define-agent | Versão inicial — extraído do PRD_Taxas_Spot_B3.md |
 | 1.1 | 2026-06-07 | build-agent | Status atualizado para Complete após build bem-sucedido |
+| 1.2 | 2026-06-07 | ship-agent | Status atualizado para Shipped; assumptions validadas contra dados reais; 5 bugs corrigidos antes do ship |
 
 ---
 
 ## Next Step
 
-**Ready for:** `/ship .claude/sdd/features/DEFINE_PIPELINE_CORE.md`
+✅ SHIPPED

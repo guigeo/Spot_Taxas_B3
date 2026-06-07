@@ -173,7 +173,14 @@ Spot_Taxas_B3/
 | Feature | Status | Descrição |
 |---------|--------|-----------|
 | Setup inicial | ✅ | KBs, agentes de domínio e CLAUDE.md configurados |
-| Pipeline core | 🔜 | Parser B3 + PTAX BACEN + join + Excel |
+
+---
+
+## Features Shipadas (SDD Archive)
+
+| Feature | Shipped | Descrição |
+|---------|---------|-----------|
+| Pipeline core | 2026-06-07 | Parser B3 + PTAX BACEN + join + Excel — `.claude/sdd/archive/PIPELINE_CORE/` |
 
 ---
 
